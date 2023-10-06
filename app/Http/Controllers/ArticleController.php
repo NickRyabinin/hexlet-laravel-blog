@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
 {
@@ -44,6 +45,8 @@ class ArticleController extends Controller
         $article->fill($data);
         // При ошибках сохранения возникнет исключение
         $article->save();
+
+        session()->flash('message', 'Article successfully created.');
 
         // Редирект на указанный маршрут
         return redirect()

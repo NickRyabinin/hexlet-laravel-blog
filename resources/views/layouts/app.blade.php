@@ -26,6 +26,11 @@
     </ul>
 
     <div class="container mx-auto">
+        @if (session()->has('message'))
+            <div class="bg-green-500">
+                {{ session('message') }}
+            </div>
+        @endif
         <h1 class="text-3xl">@yield('header')</h1>
         <div>
             @yield('content')
