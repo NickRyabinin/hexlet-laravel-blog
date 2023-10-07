@@ -13,7 +13,7 @@
 
 <body>
 
-    <ul class="flex">
+    <ul class="flex text-lg">
         <li class="ml-6 mr-6">
             <a class="text-blue-500 hover:text-blue-800" href="/">Home</a>
         </li>
