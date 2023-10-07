@@ -37,7 +37,7 @@ class ArticleController extends Controller
         // Иначе возвращаются данные формы
         $data = $request->validate([
             'name' => 'required|unique:articles|max:255',
-            'body' => 'required|min:500',
+            'body' => 'required|min:100',
         ]);
 
         $article = new Article();
@@ -49,6 +49,31 @@ class ArticleController extends Controller
         session()->flash('message', 'Article successfully created.');
 
         // Редирект на указанный маршрут
+        return redirect()
+            ->route('articles.index');
+    }
+
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('article.edit', compact('article'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $article = Article::findOrFail($id);
+        $data = $request->validate([
+            // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
+            // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
+            'name' => 'required|max:255|unique:articles,name,' . $article->id,
+            'body' => 'required|min:100',
+        ]);
+
+        $article->fill($data);
+        $article->save();
+
+        session()->flash('message', 'Article successfully updated.');
+
         return redirect()
             ->route('articles.index');
     }
