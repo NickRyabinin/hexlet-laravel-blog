@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\ArticleRequest;
 
 class ArticleController extends Controller
 {
@@ -30,19 +31,16 @@ class ArticleController extends Controller
         return view('article.create', compact('article'));
     }
 
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
         // Проверка введенных данных
         // Если будут ошибки, то возникнет исключение
         // Иначе возвращаются данные формы
-        $data = $request->validate([
-            'name' => 'required|unique:articles|max:255',
-            'body' => 'required|min:100',
-        ]);
+        $validatedData = $request->validated();
 
         $article = new Article();
         // Заполнение статьи данными из формы
-        $article->fill($data);
+        $article->fill($validatedData);
         // При ошибках сохранения возникнет исключение
         $article->save();
 
@@ -59,17 +57,12 @@ class ArticleController extends Controller
         return view('article.edit', compact('article'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, $id)
     {
         $article = Article::findOrFail($id);
-        $data = $request->validate([
-            // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
-            // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
-            'name' => 'required|max:255|unique:articles,name,' . $article->id,
-            'body' => 'required|min:100',
-        ]);
+        $validatedData = $request->validated();
 
-        $article->fill($data);
+        $article->fill($validatedData);
         $article->save();
 
         session()->flash('message', 'Article successfully updated.');
