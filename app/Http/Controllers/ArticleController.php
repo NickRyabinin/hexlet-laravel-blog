@@ -2,85 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Article;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 
 class ArticleController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $articles = Article::simplePaginate(5);
-
-        // Статьи передаются в шаблон
-        // compact('articles') => [ 'articles' => $articles ]
-        return view('article.index', compact('articles'));
+        return view('article.index', ['articles' => $articles]);
     }
 
-    public function show($id)
-    {
-        $article = Article::findOrFail($id);
-        return view('article.show', compact('article'));
-    }
-
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        // Передаем в шаблон вновь созданный объект. Он нужен для вывода формы через Form::model
-        $article = new Article();
-        return view('article.create', compact('article'));
+        $article = new Article;
+        return view('article.create', ['article' => $article]);
     }
 
-    public function store(ArticleRequest $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(ArticleRequest $request, Article $article)
     {
-        // Проверка введенных данных
-        // Если будут ошибки, то возникнет исключение
-        // Иначе возвращаются данные формы
         $validatedData = $request->validated();
-
-        $article = new Article();
-        // Заполнение статьи данными из формы
-        $article->fill($validatedData);
-        // При ошибках сохранения возникнет исключение
-        $article->save();
-
-        session()->flash('message', 'Article successfully created.');
-
-        // Редирект на указанный маршрут
-        return redirect()
-            ->route('articles.index');
+        $article->fill($validatedData)->save();
+        session()->flash('message', 'Article was successfully created!');
+        return redirect()->route('articles.show', $article);
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Article $article)
     {
-        $article = Article::findOrFail($id);
-        return view('article.edit', compact('article'));
+        return view('article.show', ['article' => $article]);
     }
 
-    public function update(ArticleRequest $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Article $article)
     {
-        $article = Article::findOrFail($id);
+        return view('article.edit', ['article' => $article]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(ArticleRequest $request, Article $article)
+    {
         $validatedData = $request->validated();
-
-        $article->fill($validatedData);
-        $article->save();
-
-        session()->flash('message', 'Article successfully updated.');
-
-        return redirect()
-            ->route('articles.index');
+        $article->fill($validatedData)->save();
+        session()->flash('message', 'Article was successfully updated!');
+        return redirect()->route('articles.show', $article);
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Article $article)
     {
-        $article = Article::find($id);
-        if ($article) {
-            $article->delete();
-        }
-
-        session()->flash('message', 'Article successfully deleted.');
-
-        return redirect()
-            ->route('articles.index');
+        $article->delete();
+        session()->flash('message', 'Article was successfully deleted!');
+        return redirect()->route('articles.index');
     }
 }

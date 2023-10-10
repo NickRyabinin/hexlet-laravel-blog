@@ -6,7 +6,7 @@
     <h1 class="text-3xl">Список статей</h1>
     @foreach ($articles as $article)
         <h2 class="text-2xl py-2">
-            <a href="{{ route('articles.show', $article->id) }}" class="align-middle">{{ $article->name }}</a>
+            <a href="{{ route('articles.show', $article->id) }}" class="align-middle hover:text-green-500">{{ $article->name }}</a>
             <a href="{{ route('articles.edit', $article->id) }}" rel="nofollow"
                 class="align-middle bg-transparent hover:bg-blue-500 text-blue-700 text-base font-semibold py-1 px-2 hover:text-white border border-blue-500 hover:border-transparent rounded">
                 Edit
@@ -22,12 +22,13 @@
         <div>{{ Str::limit($article->body, 200) }}</div>
     @endforeach
     <br>
+    <p class="text-green-500">Нажмите на заголовок статьи для её просмотра</p>
     <div class="mt-4">
         {{ $articles->links() }}
     </div>
     <br>
     <a href="{{ route('articles.create') }}" rel="nofollow"
-        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded">
         Create new
     </a>
 @endsection

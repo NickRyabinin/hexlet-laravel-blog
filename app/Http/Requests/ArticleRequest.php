@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ArticleRequest extends FormRequest
 {
@@ -30,14 +31,20 @@ class ArticleRequest extends FormRequest
     protected function store()
     {
         return [
-            'name' => 'required|unique:articles|max:255'
+            'name' => 'required|unique:articles|min:3|max:255'
         ];
     }
 
     protected function update()
     {
         return [
-            'name' => 'required|max:255|unique:articles,name,' . $this->route('id')
+            'name' => [
+                'required',
+                'min:3',
+                'max:255',
+                Rule::unique('articles')
+                    ->ignoreModel($this->article)
+            ]
         ];
     }
 }

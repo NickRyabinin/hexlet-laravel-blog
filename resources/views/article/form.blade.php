@@ -8,7 +8,7 @@
     </div>
 @endif
 
-{{ Form::label('name', 'Название') }}
+{{ Form::label('name', 'Название &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;') }}
 {{ Form::text('name') }}<br>
 {{ Form::label('body', 'Содержание') }}
 {{ Form::textarea('body') }}<br>
