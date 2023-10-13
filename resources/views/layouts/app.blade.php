@@ -35,7 +35,7 @@
                             {{ session('message') }}
                         </div>
                     @endif
-                    <h1 class="text-3xl">@yield('header')</h1>
+                    <h1 class="text-3xl mt-4">@yield('header')</h1>
                     <div>
                         @yield('content')
                     </div>

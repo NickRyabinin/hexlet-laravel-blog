@@ -3,7 +3,7 @@
 @section('title', 'Статьи')
 
 @section('content')
-    <h1 class="text-3xl">Список статей</h1>
+    <h1 class="text-3xl">Статьи</h1>
     @foreach ($articles as $article)
         <h2 class="text-2xl py-2">
             <a href="{{ route('articles.show', $article->id) }}" class="align-middle hover:text-green-500">{{ $article->name }}</a>

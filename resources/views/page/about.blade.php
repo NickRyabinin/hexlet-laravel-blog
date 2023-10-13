@@ -7,7 +7,11 @@
 
 <!-- Секция, содержащая HTML блок. Имеет открывающую и закрывающую часть. -->
 @section('content')
-    <p class="mt-4">Этот блог фактически представляет собой простой CRUD сущности Article, выполненный в учебных целях с использованием фреймворка Laravel</p>
+    <p class="mt-4">Этот блог фактически представляет собой простой CRUD сущности Article, выполненный в учебных целях.
+        Применяемый стек: Laravel/Blade/Eloquent. Аутентификация и регистрация сделаны с использованием Breeze.
+        Стилизация - Tailwind CSS.</p>
     <p class="my-4">Теги: {{ implode(', ', $tags) }}</p>
-    <p>Текущая локаль - {{ str_replace('_', '-', app()->getLocale()) }}</p>
+    <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
+        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+    </div>
 @endsection
