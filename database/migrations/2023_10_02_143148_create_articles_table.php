@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // название статьи
-            $table->text('body'); // тело статьи
+            $table->string('name');
+            $table->text('body');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@
         {{-- Str::limit – функция-хелпер, которая обрезает текст до указанной длины --}}
         {{-- Используется для очень длинных текстов, которые нужно сократить --}}
         <div>{{ Str::limit($article->body, 200) }}</div>
+        <p class="text-sm">Article creator: {{ $article->user->name }}</p>
     @endforeach
     <br>
     <p class="text-green-500">Нажмите на заголовок статьи для её просмотра</p>

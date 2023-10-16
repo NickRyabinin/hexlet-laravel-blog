@@ -32,7 +32,7 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request, Article $article)
     {
         $validatedData = $request->validated();
-        $article->fill($validatedData)->save();
+        $article = auth()->user()->articles()->create($validatedData);
         session()->flash('message', 'Article was successfully created!');
         return redirect()->route('articles.show', $article);
     }
@@ -59,18 +59,23 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, Article $article)
     {
         $validatedData = $request->validated();
-        $article->fill($validatedData)->save();
-        session()->flash('message', 'Article was successfully updated!');
+        if (auth()->user()->id === $article->user->id) {
+            $article->fill($validatedData)->save();
+            session()->flash('message', 'Article was successfully updated!');
+        } else {
+            session()->flash('message', 'Only article\'s creator can edit article!');
+        }
         return redirect()->route('articles.show', $article);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Article $article)
     {
-        $article->delete();
-        session()->flash('message', 'Article was successfully deleted!');
+        if (auth()->user()->id === $article->user->id) {
+            $article->delete();
+            session()->flash('message', 'Article was successfully deleted!');
+        } else {
+            session()->flash('message', 'Only article\'s creator can delete article!');
+        }
         return redirect()->route('articles.index');
     }
 }
