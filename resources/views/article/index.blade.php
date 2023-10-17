@@ -6,16 +6,20 @@
     <h1 class="text-3xl">Статьи</h1>
     @foreach ($articles as $article)
         <h2 class="text-2xl py-2">
-            <a href="{{ route('articles.show', $article->id) }}" class="align-middle hover:text-green-500">{{ $article->name }}</a>
+            <a href="{{ route('articles.show', $article->id) }}"
+                class="align-middle hover:text-green-500">{{ $article->name }}</a>
             <a href="{{ route('articles.edit', $article->id) }}" rel="nofollow"
                 class="align-middle bg-transparent hover:bg-blue-500 text-blue-700 text-base font-semibold py-1 px-2 hover:text-white border border-blue-500 hover:border-transparent rounded">
                 Edit
             </a>
             <span class="px-2"></span>
-            <a href="{{ route('articles.destroy', $article->id) }}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow"
-                class="align-middle bg-transparent hover:bg-red-500 text-red-700 text-base font-semibold py-1 px-2 hover:text-white border border-red-500 hover:border-transparent rounded">
-                Delete
-            </a>
+            {!! Form::open(['route' => ['articles.destroy', $article->id], 'method' => 'delete', 'class' => 'inline']) !!}
+            {!! Form::button('Delete', [
+                'type' => 'submit',
+                'class' => 'align-middle bg-transparent hover:bg-red-500 text-red-700 text-base font-semibold py-0.5 px-2 hover:text-white border border-red-500 hover:border-transparent rounded',
+                'onclick' => "return confirm('Are you sure?')",
+            ]) !!}
+            {!! Form::close() !!}
         </h2>
         {{-- Str::limit – функция-хелпер, которая обрезает текст до указанной длины --}}
         {{-- Используется для очень длинных текстов, которые нужно сократить --}}

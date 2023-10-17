@@ -11,8 +11,5 @@
         Edit
     </a>
     <span class="px-2"></span>
-    <a href="{{ route('articles.destroy', $article->id) }}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow"
-        class="align-middle bg-transparent hover:bg-red-500 text-red-700 text-base font-semibold py-1 px-2 hover:text-white border border-red-500 hover:border-transparent rounded">
-        Delete
-    </a>
+    @include('article.delete')
 @endsection
