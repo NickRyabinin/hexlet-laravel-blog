@@ -14,4 +14,3 @@ class PageController extends Controller
         return view('page.about', ['tags' => $keywords]);
     }
 }
-

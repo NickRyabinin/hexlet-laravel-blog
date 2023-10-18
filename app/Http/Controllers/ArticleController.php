@@ -22,7 +22,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $article = new Article;
+        $article = new Article();
         return view('article.create', ['article' => $article]);
     }
 
