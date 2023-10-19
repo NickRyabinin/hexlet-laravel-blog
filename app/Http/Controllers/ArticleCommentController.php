@@ -21,7 +21,8 @@ class ArticleCommentController extends Controller
      */
     public function create(Article $article)
     {
-        //
+        $comment = new ArticleComment();
+        return view('comment.create', ['article' => $article, 'comment' => $comment]);
     }
 
     /**
@@ -29,7 +30,15 @@ class ArticleCommentController extends Controller
      */
     public function store(Request $request, Article $article)
     {
-        //
+        $validatedData = $request->validate([
+
+            'body' => 'required|string|min:3|max:1000',
+
+        ]);
+        // $comment = auth()->user()->articles()->comments()->create($validatedData);
+        $comment = $article->comments()->create($validatedData);
+        session()->flash('message', 'Comment was successfully created!');
+        return redirect()->route('articles.show', [$article, $comment]);
     }
 
     /**

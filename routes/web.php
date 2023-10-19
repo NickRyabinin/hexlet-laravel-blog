@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ArticleCommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
