@@ -42,7 +42,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view('article.show', ['article' => $article]);
+        $comments = $article->comments()->get();
+        return view('article.show', ['article' => $article, 'comments' => $comments]);
     }
 
     /**

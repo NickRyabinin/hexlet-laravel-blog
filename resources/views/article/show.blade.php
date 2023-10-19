@@ -12,4 +12,5 @@
     </a>
     <span class="px-2"></span>
     @include('article.delete')
+    @include('comment.index')
 @endsection
