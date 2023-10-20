@@ -10,7 +10,7 @@ class PageController extends Controller
     {
         // Точка используется вместо /.
         // То есть шаблон находится по пути resources/views/page/about.blade.php
-        $keywords = ['обучение', 'программирование', 'php', 'oop'];
+        $keywords = ['PHP', 'Laravel', 'Blade', 'Eloquent', 'PostgreSQL', 'Breeze', 'Tailwind CSS'];
         return view('page.about', ['tags' => $keywords]);
     }
 }

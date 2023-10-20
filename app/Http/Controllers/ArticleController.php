@@ -42,7 +42,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $comments = $article->comments()->get();
+        $comments = $article->comments()->simplePaginate(3);
         return view('article.show', ['article' => $article, 'comments' => $comments]);
     }
 
