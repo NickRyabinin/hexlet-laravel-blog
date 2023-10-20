@@ -64,7 +64,7 @@ class ArticleController extends Controller
             $article->fill($validatedData)->save();
             session()->flash('message', 'Article was successfully updated!');
         } else {
-            session()->flash('message', 'Only article\'s creator can edit article!');
+            session()->flash('message', 'Only article\'s creator may edit article!');
         }
         return redirect()->route('articles.show', $article);
     }
@@ -75,7 +75,7 @@ class ArticleController extends Controller
             $article->delete();
             session()->flash('message', 'Article was successfully deleted!');
         } else {
-            session()->flash('message', 'Only article\'s creator can delete article!');
+            session()->flash('message', 'Only article\'s creator may delete article!');
         }
         return redirect()->route('articles.index');
     }

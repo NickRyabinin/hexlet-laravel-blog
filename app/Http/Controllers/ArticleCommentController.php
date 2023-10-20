@@ -31,9 +31,7 @@ class ArticleCommentController extends Controller
     public function store(Request $request, Article $article)
     {
         $validatedData = $request->validate([
-
             'body' => 'required|string|min:3|max:1000',
-
         ]);
         $comment = $article->comments()->make();
         $comment->user()->associate(auth()->user());
@@ -55,7 +53,7 @@ class ArticleCommentController extends Controller
      */
     public function edit(Article $article, ArticleComment $comment)
     {
-        //
+        return view('comment.edit', ['article' => $article, 'comment' => $comment]);
     }
 
     /**
@@ -63,7 +61,16 @@ class ArticleCommentController extends Controller
      */
     public function update(Request $request, Article $article, ArticleComment $comment)
     {
-        //
+        $validatedData = $request->validate([
+            'body' => 'required|string|min:3|max:1000',
+        ]);
+        if (auth()->user()->id === $comment->user->id) {
+            $comment->fill($validatedData)->save();
+            session()->flash('message', 'Comment was successfully updated!');
+        } else {
+            session()->flash('message', 'Only comment\'s author may edit comment!');
+        }
+        return redirect()->route('articles.show', $article);
     }
 
     /**
