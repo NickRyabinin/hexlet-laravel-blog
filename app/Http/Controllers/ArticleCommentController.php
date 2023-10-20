@@ -35,8 +35,9 @@ class ArticleCommentController extends Controller
             'body' => 'required|string|min:3|max:1000',
 
         ]);
-        // $comment = auth()->user()->articles()->comments()->create($validatedData);
-        $comment = $article->comments()->create($validatedData);
+        $comment = $article->comments()->make();
+        $comment->user()->associate(auth()->user());
+        $comment->fill($validatedData)->save();
         session()->flash('message', 'Comment was successfully created!');
         return redirect()->route('articles.show', [$article, $comment]);
     }
