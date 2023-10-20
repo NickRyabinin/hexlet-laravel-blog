@@ -78,6 +78,12 @@ class ArticleCommentController extends Controller
      */
     public function destroy(Article $article, ArticleComment $comment)
     {
-        //
+        if (auth()->user()->id === $comment->user->id) {
+            $comment->delete();
+            session()->flash('message', 'Comment was successfully deleted!');
+        } else {
+            session()->flash('message', 'Only comment\'s creator may delete comment!');
+        }
+        return redirect()->route('articles.show', $article);
     }
 }

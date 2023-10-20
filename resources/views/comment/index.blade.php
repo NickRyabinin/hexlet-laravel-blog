@@ -21,6 +21,7 @@
         </a>
     </div>
     <span class="px-2"></span>
+    @include('comment.delete')
 @endforeach
 <div class="mt-4">
     {{ $comments->links() }}
