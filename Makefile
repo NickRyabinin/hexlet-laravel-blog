@@ -1,17 +1,17 @@
 install:
 	composer install
 setup:
-	cp -n .env.example .env|| true
+	cp -n .env.example .env || true
 	php artisan key:gen --ansi
 	touch database/database.sqlite
 	php artisan migrate
 	php artisan db:seed
 	npm ci
-    npm run build
+	npm run build
 check:
-    composer validate
-    composer exec --verbose phpcs -- --standard=PSR12 routes app
-    php artisan test
+	composer validate
+	composer exec --verbose phpcs -- --standard=PSR12 routes app
+	php artisan test
 start:
 	php artisan serve --host 0.0.0.0
 validate:
