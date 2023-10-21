@@ -12,5 +12,9 @@ This project is a simple blog realized with Laravel framework for education purp
 
 ### Требования:
 PHP >= 8.1
+
 Composer
-NodeJS
+
+Node.js
+
+npm
