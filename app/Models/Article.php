@@ -11,6 +11,7 @@ class Article extends Model
 {
     use HasFactory;
 
+    // protected $dateFormat = 'Y-m-d\TH:i:s.000000\Z';
     protected $fillable = ['name', 'body'];
 
     /**
