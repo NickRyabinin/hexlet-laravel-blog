@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/NickRyabinin/hexlet-laravel-blog/workflows/project-check.yml/badge.svg)](https://github.com/NickRyabinin/hexlet-laravel-blog/actions)
+[![project-check](https://github.com/NickRyabinin/hexlet-laravel-blog/actions/workflows/project-check.yml/badge.svg)](https://github.com/NickRyabinin/hexlet-laravel-blog/actions/workflows/project-check.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/cb8075265836d93e63be/maintainability)](https://codeclimate.com/github/NickRyabinin/hexlet-laravel-blog/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/cb8075265836d93e63be/test_coverage)](https://codeclimate.com/github/NickRyabinin/hexlet-laravel-blog/test_coverage)
 
