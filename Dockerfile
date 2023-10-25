@@ -25,7 +25,6 @@ ENV RUN_SCRIPTS 1
 ENV REAL_IP_HEADER 1
 
 # Laravel config
-RUN php artisan env:decrypt
 ENV APP_ENV production
 ENV APP_DEBUG false
 ENV LOG_CHANNEL stderr
@@ -37,4 +36,4 @@ RUN composer install
 RUN npm ci
 RUN npm run build
 
-CMD ["bash", "-c", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"]
+CMD ["bash", "-c", "php artisan env:decrypt && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"]
