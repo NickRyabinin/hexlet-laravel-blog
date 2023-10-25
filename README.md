@@ -19,3 +19,20 @@ Composer
 Node.js
 
 npm
+
+### Локальная установка:
+```bash
+git clone git@github.com:NickRyabinin/hexlet-laravel-blog.git
+
+make install
+
+make setup
+```
+### Линтинг и тестирование:
+```bash
+make check
+```
+### Локальный запуск:
+```bash
+make start
+```

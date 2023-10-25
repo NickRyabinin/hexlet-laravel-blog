@@ -14,7 +14,6 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-    use CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
