@@ -1,4 +1,4 @@
-name: actions
+name: project-check
 
 on:
   push:
