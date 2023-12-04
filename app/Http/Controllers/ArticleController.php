@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
+use App\Exports\ArticlesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ArticleController extends Controller
 {
@@ -78,5 +80,10 @@ class ArticleController extends Controller
             session()->flash('message', 'Only article\'s creator may delete article!');
         }
         return redirect()->route('articles.index');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ArticlesExport, 'articles.xlsx');
     }
 }

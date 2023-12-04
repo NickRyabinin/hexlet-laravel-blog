@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'about'])
     ->name('home');
 
+Route::get('articles/export/', [ArticleController::class, 'export'])
+    ->middleware(['auth', 'verified']);
+
 Route::resource('articles', ArticleController::class)
     ->middleware(['auth', 'verified']);
 
