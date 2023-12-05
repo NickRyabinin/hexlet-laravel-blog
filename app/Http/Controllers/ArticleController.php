@@ -84,6 +84,6 @@ class ArticleController extends Controller
 
     public function export()
     {
-        return Excel::download(new ArticlesExport, 'articles.xlsx');
+        return Excel::download(new ArticlesExport(), 'articles.xlsx');
     }
 }
