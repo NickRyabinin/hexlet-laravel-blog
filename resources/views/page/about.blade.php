@@ -13,6 +13,10 @@
         В продакшене используется БД PostgreSQL, в локальном окружении - SQLite.</p>
     <p class="my-4">Теги: {{ implode(', ', $tags) }}</p>
     <div class="my-4">
+        Ваш IP адрес: {{ $clientIp }}
+        <br>
+        Ваше местоположение: {{ $location }}
+        <br>
         Температура сейчас где-то в Мордовии: {{ $currentTemperature }}°C
     </div>
     <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
