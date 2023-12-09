@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class PageController extends Controller
 {
-    public function about(Request $request)
+    public function about()
     {
         $keywords = ['PHP', 'Laravel', 'Blade', 'Eloquent', 'PostgreSQL', 'Breeze', 'Tailwind CSS'];
         $list = [];
@@ -32,7 +30,7 @@ class PageController extends Controller
         }
         $list = array_unique($list);
         $ipList = implode(',', $list);
-        $clientIp = $list[0];
+        $clientIp = $list[0] ?? '';
         $locationUrl = "http://ip-api.com/json/{$clientIp}?lang=ru";
         $contentLocationJson = file_get_contents($locationUrl);
         $contentLocationArray = json_decode($contentLocationJson, true);
