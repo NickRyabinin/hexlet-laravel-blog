@@ -11,7 +11,7 @@ class PageController extends Controller
         $keywords = ['PHP', 'Laravel', 'Blade', 'Eloquent', 'PostgreSQL', 'Breeze', 'Tailwind CSS'];
         /* $list = [];
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            $ip = explode(',', $_SERVER['HTTP_CLIENT_IP']);
             $list = array_merge($list, $ip);
         } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
@@ -21,7 +21,7 @@ class PageController extends Controller
         }
         $list = array_unique($list);
         $ipList = implode(',', $list); */
-        $clientIp = $_SERVER['REMOTE_ADDR'];
+        $clientIp = $_SERVER['HTTP_CLIENT_IP'];
         $locationUrl = "http://ip-api.com/json/{$clientIp}?lang=ru";
         $contentLocationJson = file_get_contents($locationUrl);
         $contentLocationArray = json_decode($contentLocationJson, true);
