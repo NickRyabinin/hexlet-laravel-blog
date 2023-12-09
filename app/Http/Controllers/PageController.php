@@ -21,7 +21,14 @@ class PageController extends Controller
         }
         $list = array_unique($list);
         $ipList = implode(',', $list); */
-        $clientIp = $_SERVER['HTTP_CLIENT_IP'];
+        $clientIp = '';
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $clientIp = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $clientIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
+            $clientIp = $_SERVER['REMOTE_ADDR'];
+        }
         $locationUrl = "http://ip-api.com/json/{$clientIp}?lang=ru";
         $contentLocationJson = file_get_contents($locationUrl);
         $contentLocationArray = json_decode($contentLocationJson, true);
