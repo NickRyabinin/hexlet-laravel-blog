@@ -15,8 +15,6 @@
     <div class="my-4">
         Ваш IP адрес: {{ $clientIp }}
         <br>
-        Список ваших возможных IP адресов: {{ var_export($ipList) }}
-        <br>
         Ваше местоположение: {{ $location }}
         <br>
         Температура сейчас где-то в Мордовии: {{ $currentTemperature }}°C

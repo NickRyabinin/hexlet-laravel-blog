@@ -9,7 +9,7 @@ class PageController extends Controller
     public function about(Request $request)
     {
         $keywords = ['PHP', 'Laravel', 'Blade', 'Eloquent', 'PostgreSQL', 'Breeze', 'Tailwind CSS'];
-        $list = [];
+        /* $list = [];
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
             $list = array_merge($list, $ip);
@@ -20,8 +20,8 @@ class PageController extends Controller
             $list[] = $_SERVER['REMOTE_ADDR'];
         }
         $list = array_unique($list);
-        $ipList = implode(',', $list);
-        $clientIp = $request->ip();
+        $ipList = implode(',', $list); */
+        $clientIp = $_SERVER['REMOTE_ADDR'];
         $locationUrl = "http://ip-api.com/json/{$clientIp}?lang=ru";
         $contentLocationJson = file_get_contents($locationUrl);
         $contentLocationArray = json_decode($contentLocationJson, true);
@@ -39,7 +39,6 @@ class PageController extends Controller
             'tags' => $keywords,
             'currentTemperature' => $currentTemperature,
             'clientIp' => $clientIp,
-            'ipList' => $ipList,
             'location' => $locationCity,
         ]);
     }
