@@ -7,23 +7,23 @@
 
 <!-- Секция, содержащая HTML блок. Имеет открывающую и закрывающую часть. -->
 @section('content')
-    <p class="mt-4">Этот блог фактически представляет собой простой CRUD сущностей Article и ArticleComment, выполненный в учебных целях.
-        Применяемый стек: PHP/Laravel/Blade/Eloquent. Аутентификация и регистрация сделаны с использованием Breeze.
-        Стилизация - Tailwind CSS.
-        В продакшене используется БД PostgreSQL, в локальном окружении - SQLite.</p>
-    <p class="my-4">Теги: {{ implode(', ', $tags) }}</p>
-    <div class="my-4">
-        Ваш IP адрес: {{ $clientIp }}
-        <br>
-        Список ваших возможных IP: {{ $ipList }}
-        <br>
-        Ваше местоположение: {{ $location }}
-        <br>
-        Температура сейчас в вашем местоположении: {{ $locationTemperature }}°C
-        <br>
-        Температура сейчас где-то в Мордовии: {{ $currentTemperature }}°C
-    </div>
-    <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
-        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+    <section>
+        <p class="my-4">Этот блог фактически представляет собой простой CRUD сущностей Article и ArticleComment,
+            выполненный в учебных целях. Применяемый стек: PHP/Laravel/Blade/Eloquent. Регистрация и аутентификация
+            сделаны с использованием Breeze (при сбросе пароля пользователя email на реальный адрес не отправляется,
+            вместо этого используется сервис mailtrap.io). Стилизация - Tailwind CSS. В продакшене используется
+            БД PostgreSQL, в локальном окружении - SQLite. Есть локализация панели навигации (посредством middleware),
+            в зависимости от настроек языка, предпочитаемого для отображения страниц в браузере. Частично реализованы
+            функциональные тесты. Также имеется возможность экспортировать сущность Article в файл 'articles.xlsx'
+            (применена библиотека maatwebsite/excel).</p>
+        <p>Upd: добавлено отображение ip клиента, локации, соответствующей этому ip (ip-api.com) и текущей температуры
+            в этой локации (api.open-meteo.com).</p>
+        <p class="my-4">Теги: {{ implode(', ', $tags) }}</p>
+    </section>
+    <div class="text-right text-sm text-gray-500">
+        <p>Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
+        <p>&#128421;&#65039;&nbsp;{{ $clientIp }}</p>
+        <p>&#129517;&nbsp;{{ $location }}</p>
+        <p>&#127777;&#65039;&nbsp;{{ $locationTemperature }}°C</p>
     </div>
 @endsection
