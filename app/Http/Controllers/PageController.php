@@ -2,24 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Custom\ClientIp;
+
 class PageController extends Controller
 {
     public function about()
     {
         $keywords = ['PHP', 'Laravel', 'Blade', 'Eloquent', 'PostgreSQL', 'Breeze', 'Tailwind CSS'];
-        $listOfIps = [];
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = explode(',', $_SERVER['HTTP_CLIENT_IP']);
-            $listOfIps = array_merge($listOfIps, $ip);
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-            $listOfIps = array_merge($listOfIps, $ip);
-        } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
-            $listOfIps[] = $_SERVER['REMOTE_ADDR'];
-        }
-        $listOfIps = array_unique($listOfIps);
-        $ipList = implode(',', $listOfIps);
-        $clientIp = $listOfIps[0] ?? '';
+        $ip = new ClientIp();
+        $clientIp = $ip->getIp();
         $locationUrl = "http://ip-api.com/json/{$clientIp}?lang=ru";
         $contentLocationJson = file_get_contents($locationUrl);
         $contentLocationArray = json_decode($contentLocationJson, true);
@@ -41,7 +32,6 @@ class PageController extends Controller
             'tags' => $keywords,
             'locationTemperature' => $locationTemperature,
             'clientIp' => $clientIp,
-            'ipList' => $ipList,
             'location' => $locationCity,
         ]);
     }
