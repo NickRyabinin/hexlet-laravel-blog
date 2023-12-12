@@ -23,7 +23,7 @@
     <div class="text-right text-sm text-gray-500">
         <p>Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
         <p>&#128421;&#65039;&nbsp;{{ $clientIp }}</p>
-        <p>&#129517;&nbsp;{{ $location }}</p>
-        <p>&#127777;&#65039;&nbsp;{{ $locationTemperature }}°C</p>
+        <p>&#129517;&nbsp;{{ $clientLocation ?? 'не удалось определить' }}</p>
+        <p>&#127777;&#65039;&nbsp;{{ $locationTemperature ?? 'не удалось определить' }}</p>
     </div>
 @endsection
