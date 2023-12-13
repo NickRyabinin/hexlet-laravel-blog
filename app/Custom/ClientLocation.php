@@ -7,8 +7,18 @@ class ClientLocation
     private function findLocation(string $ip)
     {
         $locationUrl = "http://ip-api.com/json/{$ip}?lang=ru";
-        $contentLocationJson = file_get_contents($locationUrl);
-        $contentLocationArray = json_decode($contentLocationJson, true);
+        $ch = curl_init($locationUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        $json = curl_exec($ch);
+        curl_close($ch);
+        if (!$json) {
+            return null;
+        }
+        $contentLocationArray = json_decode($json, true);
         if ($contentLocationArray['status'] === 'success') {
             $locationCity = $contentLocationArray['city'];
             $locationLat = $contentLocationArray['lat'];
