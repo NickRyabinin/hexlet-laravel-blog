@@ -20,8 +20,9 @@ This project is a simple 'blog' realized with Laravel framework for education pu
 (применена библиотека maatwebsite/excel).
 
 
-Upd: добавлено отображение ip клиента, локации, соответствующей этому ip (ip-api.com) и текущей температуры
-в этой локации (api.open-meteo.com).
+Upd: добавлен асинхронный виджет отображения ip клиента, локации, соответствующей этому ip (ip-api.com) и текущей
+температуры в этой локации (api.open-meteo.com) (применена библиотека arrilot/laravel-widgets, json-файлы от
+внешних API подтягиваются через curl с установленными timeout). 
 
 Посмотреть задеплоенный проект можно [по этой ссылке](https://blog-ckij.onrender.com).
 
