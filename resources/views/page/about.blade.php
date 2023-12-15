@@ -1,11 +1,8 @@
 @extends('layouts.app')
 
-<!-- Секция, содержимое которой обычный текст. -->
 @section('title', 'О блоге')
-
 @section('header', 'О блоге')
 
-<!-- Секция, содержащая HTML блок. Имеет открывающую и закрывающую часть. -->
 @section('content')
     <section>
         <p class="my-4">Этот блог фактически представляет собой простой CRUD сущностей Article и ArticleComment,
@@ -22,8 +19,6 @@
     </section>
     <div class="text-right text-sm text-gray-500">
         <p>Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
-        <p>&#128421;&#65039;&nbsp;{{ $clientIp }}</p>
-        <p>&#129517;&nbsp;{{ $clientLocation ?? 'не удалось определить' }}</p>
-        <p>&#127777;&#65039;&nbsp;{{ $locationTemperature ?? 'не удалось определить' }}</p>
+        @asyncWidget('LocationWidget')
     </div>
 @endsection
